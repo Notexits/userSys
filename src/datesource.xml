@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<datesource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:noNamespaceSchemaLocation="datesource.xsd">
+		<driverClass>oracle.jdbc.driver.OracleDriver</driverClass>
+		<jdbcUrl>jdbc:oracle:thin:@localhost:1521:orcl</jdbcUrl>
+		<user>scott</user>
+		<password>root</password>
+		
+</datesource>
