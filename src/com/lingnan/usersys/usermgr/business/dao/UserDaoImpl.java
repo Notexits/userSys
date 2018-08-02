@@ -154,4 +154,18 @@ public class UserDaoImpl extends DaoImplement<UserVO> implements UserDao{
 		return null;
 	}
 
+	@Override
+	public List<UserVO> blurredSearch(UserCheckVO user) {
+		String sql = "select * from u_user where (id like ? or "
+				+ "username like ? or hiredate like ? or email like ?"
+					+ " or phone like ?) and status = 1 ";
+		try {
+			return this.getForList(connection, sql, user.getId(),
+					user.getUsername(), user.getHiredate(), user.getEmail(), user.getPhone());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

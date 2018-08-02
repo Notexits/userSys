@@ -63,7 +63,12 @@ public interface UserDao extends BaseDao {
 	public List<UserVO> findAllUser();
 	
 	
-	
+	/**
+	 * 模糊查找方法
+	 * @param userCheck 存放查找信息的类
+	 * @return 返回符合条件的结果集
+	 */
+	public List<UserVO> blurredSearch(UserCheckVO userCheck);
 	
 	
 }

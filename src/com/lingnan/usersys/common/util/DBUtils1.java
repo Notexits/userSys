@@ -5,18 +5,33 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 
-import javax.sql.DataSource;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-
-
-public class DBUtils {
-
-	public static DataSource dataSource = null;
+/**
+ * JDBC工具类
+ * @author Administrator
+ *
+ */
+public class DBUtils1 {
 	
+	private static Map<String, String> map = null;
+	private static String xmlPath = "datesource.xml";
+	private static String xsdPath = "datesource.xsd";
+	
+	/**
+	 * 进行XML验证
+	 */
 	static {
-		dataSource = new ComboPooledDataSource("helloc3p0");
+		if(XmlValidator.validate(xmlPath, xsdPath)) {
+			if(XmlParser.parser(xmlPath)) {
+				map = XmlParser.getParserMap();
+			}else {
+				System.out.println("xml参数获取失败!!!");
+			}
+		}
+		else {
+			System.out.println("xml文件验证失败!!!");
+		}
 	}
 	
 	/**
@@ -26,11 +41,16 @@ public class DBUtils {
 	public static Connection getConnection(){
 		Connection connection = null;
 		try {
-			connection = dataSource.getConnection();
-		} catch (SQLException e) {
+			
+			Class.forName(map.get("driverClass"));
+			connection = DriverManager.getConnection(map.get("jdbcUrl"), map.get("user"), map.get("password"));
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("未找到加载器，加载驱动程序失败！！！");
+			e.printStackTrace();
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		return connection;
 	}
 	

@@ -2,6 +2,7 @@ package com.lingnan.usersys.usermgr.controller;
 
 import java.util.List;
 
+import com.lingnan.usersys.usermgr.business.dao.UserCheckVO;
 import com.lingnan.usersys.usermgr.business.service.DaoServiceImple;
 import com.lingnan.usersys.usermgr.domain.UserVO;
 
@@ -106,6 +107,20 @@ public class UserController {
 	public List<UserVO> doFindAllUser(){
 		try {
 			return service.findAllUser();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 模糊查找方法
+	 * @param user 存放查找信息的类
+	 * @return 返回符合条件的结果集
+	 */
+	public List<UserVO> doBlurredSearch(UserCheckVO user){
+		try {
+			return service.blurredSearch(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

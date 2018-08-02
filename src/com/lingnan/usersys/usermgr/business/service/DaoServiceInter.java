@@ -2,6 +2,7 @@ package com.lingnan.usersys.usermgr.business.service;
 
 import java.util.List;
 
+import com.lingnan.usersys.usermgr.business.dao.UserCheckVO;
 import com.lingnan.usersys.usermgr.domain.UserVO;
 
 /**
@@ -59,6 +60,11 @@ public interface DaoServiceInter {
 	 */
 	public List<UserVO> findAllUser();
 
-	
+	/**
+	 * 模糊查找方法
+	 * @param userCheck 存放查找信息的类
+	 * @return 返回符合条件的结果集
+	 */
+	public List<UserVO> blurredSearch(UserCheckVO userCheck);
 	
 }

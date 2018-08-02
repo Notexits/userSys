@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.lingnan.usersys.common.dao.DaoFactory;
 import com.lingnan.usersys.common.util.DBUtils;
+import com.lingnan.usersys.usermgr.business.dao.UserCheckVO;
 import com.lingnan.usersys.usermgr.business.dao.UserDao;
 import com.lingnan.usersys.usermgr.business.dao.UserDaoImpl;
 import com.lingnan.usersys.usermgr.domain.UserVO;
@@ -158,6 +159,25 @@ public class DaoServiceImple implements DaoServiceInter {
 			connection = DBUtils.getConnection();
 			dao = DaoFactory.getDao(UserDaoImpl.class, connection);
 			users = dao.findAllUser();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.release(connection, null, null);
+		}
+		return users;
+	}
+
+	@Override
+	public List<UserVO> blurredSearch(UserCheckVO userCheck) {
+		Connection connection = null;
+		UserDao dao = null;
+		List<UserVO> users = null;
+		
+		try {
+			connection = DBUtils.getConnection();
+			dao = DaoFactory.getDao(UserDaoImpl.class, connection);
+			users = dao.blurredSearch(userCheck);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

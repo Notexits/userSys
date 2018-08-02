@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.lingnan.usersys.common.util.CommonUtils;
+import com.lingnan.usersys.usermgr.business.dao.UserCheckVO;
 import com.lingnan.usersys.usermgr.controller.UserController;
 import com.lingnan.usersys.usermgr.domain.UserVO;
 
@@ -105,7 +106,15 @@ public class AdminFrame extends CommonUserFrame {
 				}
 				break;
 			case 4:
-				System.out.println("待定...");
+				System.out.print("请输入所查询的信息：");
+				String searchInfo = scanner.nextLine();
+				users = controller.doBlurredSearch(new UserCheckVO(searchInfo,
+						searchInfo, searchInfo, searchInfo, searchInfo, searchInfo, searchInfo, searchInfo));
+				System.out.println("符合条件的用户信息如下：");
+				for(UserVO u : users) {
+					u.scannerUserInfo();
+				}
+				System.out.println();
 				break;
 			default:
 				break;
